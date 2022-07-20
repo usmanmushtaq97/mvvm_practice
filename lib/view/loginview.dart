@@ -13,13 +13,14 @@ class _LoginViewState extends State<LoginView> {
   TextEditingController passwordController = TextEditingController();
   FocusNode passwordFocusNode = FocusNode();
   FocusNode emailFocusNode = FocusNode();
-
+  ValueNotifier<bool> obscurePassword = ValueNotifier<bool>((true));
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Home Screen"),
+          title: const Text("Login"),
+          centerTitle: true,
         ),
         body: Container(
            margin: const EdgeInsets.symmetric(horizontal: 25),
@@ -47,7 +48,7 @@ class _LoginViewState extends State<LoginView> {
                 focusNode: passwordFocusNode,
                 decoration: const InputDecoration(
                   hintText: "Password",
-                  prefixIcon: Icon(Icons.password),
+                  prefixIcon: Icon(Icons.lock_clock_outlined),
                   labelText: "Password",
                   suffixIcon: Icon(Icons.visibility_off_outlined)
                 ),
