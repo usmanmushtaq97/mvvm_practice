@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_practice/utiles/utiles.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -12,6 +13,7 @@ class _LoginViewState extends State<LoginView> {
   TextEditingController passwordController = TextEditingController();
   FocusNode passwordFocusNode = FocusNode();
   FocusNode emailFocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,34 +21,39 @@ class _LoginViewState extends State<LoginView> {
         appBar: AppBar(
           title: const Text("Home Screen"),
         ),
-        body: Column(
-          children: [
-            TextFormField(
-              controller: emailController,
-              focusNode: emailFocusNode,
-
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                hintText: "Email",
-                prefixIcon: Icon(Icons.email),
-                labelText: "Email",
+        body: Container(
+           margin: const EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextFormField(
+                controller: emailController,
+                focusNode: emailFocusNode,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  hintText: "Email",
+                  prefixIcon: Icon(Icons.email),
+                  labelText: "Email",
+                ),
+                onFieldSubmitted: (value) {
+                 Utils.focusChange(current: emailFocusNode, nextFocus: passwordFocusNode, context: context);
+                },
               ),
-              onFieldSubmitted: (value){
-                FocusScope.of(context).requestFocus(passwordFocusNode);
-              },
-            ),
-            TextFormField(
-              controller: passwordController,
-              obscureText: true,
-              focusNode: passwordFocusNode,
-              decoration: const InputDecoration(
-                hintText: "Password",
-                prefixIcon: Icon(Icons.password),
-                labelText: "Password",
-
+             const SizedBox(height: 7),
+              TextFormField(
+                controller: passwordController,
+                obscureText: true,
+                focusNode: passwordFocusNode,
+                decoration: const InputDecoration(
+                  hintText: "Password",
+                  prefixIcon: Icon(Icons.password),
+                  labelText: "Password",
+                  suffixIcon: Icon(Icons.visibility_off_outlined)
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -26,6 +26,7 @@ class Utils {
           duration: const Duration(seconds: 3),
         )..show(context));
   }
+
   // Flush Bar for Error Message
   static flushBarErrorMessage(String message, BuildContext context) {
     showFlushbar(
@@ -46,9 +47,17 @@ class Utils {
           duration: const Duration(seconds: 3),
         )..show(context));
   }
+
   // Snack bar for showing message
   static snackBar(String message, BuildContext context) {
-    return ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content:Text("Message"))
-    );
+    return ScaffoldMessenger.of(context)
+        .showSnackBar(const SnackBar(content: Text("Message")));
   }
+
+  // Focus Change costume methods
+  static focusChange(
+      {required FocusNode current, required FocusNode nextFocus,required BuildContext context}) {
+       current.unfocus();
+       FocusScope.of(context).requestFocus(nextFocus);
+      }
 }
