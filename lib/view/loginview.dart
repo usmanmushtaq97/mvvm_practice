@@ -3,6 +3,7 @@ import 'package:mvvm_practice/utiles/utiles.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
+
   @override
   State<LoginView> createState() => _LoginViewState();
 }
@@ -13,6 +14,7 @@ class _LoginViewState extends State<LoginView> {
   FocusNode passwordFocusNode = FocusNode();
   FocusNode emailFocusNode = FocusNode();
   ValueNotifier<bool> obscurePassword = ValueNotifier<bool>((false));
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -22,7 +24,7 @@ class _LoginViewState extends State<LoginView> {
           centerTitle: true,
         ),
         body: Container(
-           margin: const EdgeInsets.symmetric(horizontal: 25),
+          margin: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,30 +39,33 @@ class _LoginViewState extends State<LoginView> {
                   labelText: "Email",
                 ),
                 onFieldSubmitted: (value) {
-                 Utils.focusChange(current: emailFocusNode, nextFocus: passwordFocusNode, context: context);
+                  Utils.focusChange(
+                      current: emailFocusNode,
+                      nextFocus: passwordFocusNode,
+                      context: context);
                 },
               ),
-             const SizedBox(height: 7),
-              ValueListenableBuilder(valueListenable: obscurePassword, builder: (context, value, child){
-                return  TextFormField(
-                  controller: passwordController,
-                  obscureText: obscurePassword.value,
-                  focusNode: passwordFocusNode,
-                  decoration:  InputDecoration(
-                      hintText: "Password",
-                      prefixIcon: Icon(Icons.lock_clock_outlined),
-                      labelText: "Password",
-                      suffixIcon: InkWell(
-                          onTap: (){
-                            obscurePassword.value = ! obscurePassword.value;
-                          },
-                          child:  Icon( obscurePassword.value? Icons.visibility_off_outlined
-                              : Icons.visibility
-                          ))
-                  ),
-                );
-              }),
-
+              const SizedBox(height: 7),
+              ValueListenableBuilder(
+                  valueListenable: obscurePassword,
+                  builder: (context, value, child) {
+                    return TextFormField(
+                      controller: passwordController,
+                      obscureText: obscurePassword.value,
+                      focusNode: passwordFocusNode,
+                      decoration: InputDecoration(
+                          hintText: "Password",
+                          prefixIcon: const Icon(Icons.lock_clock_outlined),
+                          labelText: "Password",
+                          suffixIcon: InkWell(
+                              onTap: () {
+                                obscurePassword.value = !obscurePassword.value;
+                              },
+                              child: Icon(obscurePassword.value
+                                  ? Icons.visibility_off_outlined
+                                  : Icons.visibility))),
+                    );
+                  }),
             ],
           ),
         ),
