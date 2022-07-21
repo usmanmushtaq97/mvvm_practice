@@ -18,9 +18,6 @@ class AppColors {
   static const appMainColor = Color.fromRGBO(240, 196, 84, 1);
   static const getStartedButtonColor = Color.fromRGBO(240, 196, 84, 1);
   static const onBoardingButtonColor = Color.fromRGBO(240, 196, 84, 1);
-
-
-
   static const getStartedButtonColorShadow = Color.fromRGBO(0, 0, 0, 0.08);
   static const readyToEarnTextColor = Color.fromRGBO(152, 152, 152, 1);
   static const openTheTruckerAppTextColor = Color.fromRGBO(18, 99, 18, 1);
