@@ -3,7 +3,6 @@ import 'package:mvvm_practice/utiles/utiles.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
-
   @override
   State<LoginView> createState() => _LoginViewState();
 }
@@ -13,7 +12,7 @@ class _LoginViewState extends State<LoginView> {
   TextEditingController passwordController = TextEditingController();
   FocusNode passwordFocusNode = FocusNode();
   FocusNode emailFocusNode = FocusNode();
-  ValueNotifier<bool> obscurePassword = ValueNotifier<bool>((true));
+  ValueNotifier<bool> obscurePassword = ValueNotifier<bool>((false));
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -42,17 +41,26 @@ class _LoginViewState extends State<LoginView> {
                 },
               ),
              const SizedBox(height: 7),
-              TextFormField(
-                controller: passwordController,
-                obscureText: true,
-                focusNode: passwordFocusNode,
-                decoration: const InputDecoration(
-                  hintText: "Password",
-                  prefixIcon: Icon(Icons.lock_clock_outlined),
-                  labelText: "Password",
-                  suffixIcon: Icon(Icons.visibility_off_outlined)
-                ),
-              ),
+              ValueListenableBuilder(valueListenable: obscurePassword, builder: (context, value, child){
+                return  TextFormField(
+                  controller: passwordController,
+                  obscureText: obscurePassword.value,
+                  focusNode: passwordFocusNode,
+                  decoration:  InputDecoration(
+                      hintText: "Password",
+                      prefixIcon: Icon(Icons.lock_clock_outlined),
+                      labelText: "Password",
+                      suffixIcon: InkWell(
+                          onTap: (){
+                            obscurePassword.value = ! obscurePassword.value;
+                          },
+                          child:  Icon( obscurePassword.value? Icons.visibility_off_outlined
+                              : Icons.visibility
+                          ))
+                  ),
+                );
+              }),
+
             ],
           ),
         ),
