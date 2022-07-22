@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_practice/res/res.dart';
 import 'package:mvvm_practice/utiles/utiles.dart';
+
+import '../res/componants/roundedbuttons.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
-
   @override
   State<LoginView> createState() => _LoginViewState();
 }
@@ -14,7 +16,15 @@ class _LoginViewState extends State<LoginView> {
   FocusNode passwordFocusNode = FocusNode();
   FocusNode emailFocusNode = FocusNode();
   ValueNotifier<bool> obscurePassword = ValueNotifier<bool>((false));
-
+   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    emailFocusNode.dispose();
+    emailController.dispose();
+    passwordFocusNode.dispose();
+    passwordFocusNode.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -65,6 +75,23 @@ class _LoginViewState extends State<LoginView> {
                                   ? Icons.visibility_off_outlined
                                   : Icons.visibility))),
                     );
+                  }),
+               const SizedBox(height: 100),
+              RoundedButton(
+                  title: "Login",
+                  loading: false,
+                  onPress: () {
+                    if (emailController.text.isEmpty) {
+                      Utils.flushBarErrorMessage("Enter Email", context);
+                    }
+                    else if (passwordController.text.isEmpty) {
+                      Utils.flushBarErrorMessage("Enter Password", context);
+                    }
+                    else if (passwordController.text.length < 6) {
+                      Utils.flushBarErrorMessage("Length Must greater then 6", context);
+                    } else {
+                      print("hit Api");
+                    }
                   }),
             ],
           ),
