@@ -14,7 +14,7 @@ class NetworkApiService extends BaseApiService {
     try {
       final response =
           await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
-      jsonResponse = returnResponse(response);
+          jsonResponse = returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet Exception');
     }
@@ -45,9 +45,12 @@ class NetworkApiService extends BaseApiService {
         return jsonResponse;
       case 404:
         throw UnauthorisedException(response.body.toString());
+      case 400:
+        throw UnauthorisedException(response.body.toString());
+        break;
       default:
         throw BadRequestException(
-            'Error accrued while communication with server');
+            response.body.toString()+'Error accrued while communication with server');
     }
   }
 }
