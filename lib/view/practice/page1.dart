@@ -10,8 +10,8 @@ class Page1 extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            SizedBox(height: 50),
-            HeadingImage(title: "Title", subTitle: "Lorum is the sub title of the text below", isImage: true, path: "assets/svg/notification_icon.svg",)
+            SizedBox(height: 30),
+            HeadingImage(title: "Title", subTitle: "Lorum is the sub title of the text below", isImage: true, path: "assets/svg/heart_icon.svg",)
           ],
         ),
       ),

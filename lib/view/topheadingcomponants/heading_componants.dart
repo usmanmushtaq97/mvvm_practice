@@ -26,7 +26,7 @@ class HeadingImage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
                        children: [
              if(isImage) ...[ SvgPicture.asset(path!),
-             const SizedBox(width: 30)], SizedBox( height: 50, child: Align( alignment: Alignment.center,  child: Text(title, textAlign: TextAlign.center,)),)
+             const SizedBox(width: 30)],  Text(title, textAlign: TextAlign.center,),
             ],
           ),
           const SizedBox(height: 20),
